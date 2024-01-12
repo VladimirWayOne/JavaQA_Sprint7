@@ -1,6 +1,5 @@
 import client.GetOrdersClient;
 import client.OrderClient;
-import dto.OrderListRequest;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.junit4.DisplayName;
@@ -17,18 +16,17 @@ import static org.hamcrest.Matchers.notNullValue;
 @Feature("Поиск заказов")
 public class GetOrderTest {
     private OrderListSteps orderListSteps;
-//    private OrderSteps orderSteps;
+
     @Before
     public void setUp() {
         orderListSteps = new OrderListSteps(new GetOrdersClient());
-//        orderSteps = new OrderSteps(new OrderClient());
+
     }
 
     @Test
     @DisplayName("Проверка запроса списка заказов")
     @Description("Данный тест проверяет, что метод возвращает код 200 и в теле ответа orders является массивом")
     public void testGetOrderList() {
-        OrderListRequest orderListRequest = new OrderListRequest();
         orderListSteps.getOrderListWithEmptyBody().statusCode(SC_OK)
                 .body("orders", notNullValue());
     }
